@@ -19,7 +19,7 @@ public class OVchipkaart {
     @JoinColumn(name = "reiziger_id")
     private Reiziger reiziger;
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany( fetch = FetchType.LAZY)
     @JoinTable(name="ov_chipkaart_product", joinColumns={@JoinColumn(name ="kaart_nummer")}
             , inverseJoinColumns={@JoinColumn(name ="product_nummer")})
     private List<Product> producten = new ArrayList<>();
@@ -76,6 +76,10 @@ public class OVchipkaart {
 
     public void removeProduct(Product product){
         producten.remove(product);
+    }
+
+    public void addReiziger(Reiziger reiziger) {
+        this.reiziger = reiziger;
     }
 
     public String toString(){

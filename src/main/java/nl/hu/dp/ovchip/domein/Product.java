@@ -14,7 +14,7 @@ public class Product {
     private String beschrijving;
     private double prijs;
 
-    @ManyToMany(mappedBy="producten")
+    @ManyToMany(mappedBy="producten", fetch = FetchType.LAZY)
     private List<OVchipkaart> chipkaarten = new ArrayList<>();
 
     public Product(int productnummer, String naam, String beschrijving, double prijs) {

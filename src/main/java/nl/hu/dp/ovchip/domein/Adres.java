@@ -68,6 +68,10 @@ public class Adres {
         this.adresid = adresid;
     }
 
+    public Reiziger getReiziger() {return reiziger;}
+
+    public void setReiziger(Reiziger reiziger) {this.reiziger = reiziger;}
+
     public String toString(){
         String adres = "#" + adresid + " ";
         adres += postcode + " ";

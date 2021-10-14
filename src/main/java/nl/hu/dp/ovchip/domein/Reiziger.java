@@ -15,7 +15,12 @@ public class Reiziger {
     private String tussenvoegsel;
     private String achternaam;
     private Date geboortedatum;
-    @OneToOne(mappedBy="reiziger")
+    @OneToOne(
+            mappedBy = "reiziger",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
     private Adres adres;
 
     @OneToMany(mappedBy = "reiziger", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -81,10 +86,15 @@ public class Reiziger {
 
     public void addChipkaart(OVchipkaart chipkaart){
         chipkaarten.add(chipkaart);
+        chipkaart.addReiziger(this);
     }
 
     public void removeChipkaart(OVchipkaart chipkaart){
         chipkaarten.remove(chipkaart);
+    }
+
+    public void removeAdres(){
+        this.adres = null;
     }
 
     public String toString(){
@@ -102,4 +112,12 @@ public class Reiziger {
         return reiziger;
     }
 
+    public void setAdres(Adres adres) {
+        this.adres = adres;
+        this.adres.setReiziger(this);
+    }
+
+    public Adres getAdres(Adres adres) {
+        return adres;
+    }
 }
